@@ -1,44 +1,26 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from MainApp.models import Item
+from django.core.exceptions import ObjectDoesNotExist
 
-author = {
-    "first_name": "Evgeniy",
-    "nickname" : "MADAO",
-    "last_name": "Chernyshev",
-    "phone": "89932765699",
-    "email": "chernyshev.evgeniy@gmail.com",
-}
 
-items = [
-   {"id": 1, "name": "sneakers ", "quantity":32},
-   {"id": 2, "name": "leather jacket", "quantity":5},
-   {"id": 3, "name": "coca cola", "quantity":64},
-   {"id": 4, "name": "cheetos chips", "quantity":23},
-   {"id": 5, "name": "sombrero", "quantity":8},
-]
+
 
 def main_page(request):
     return render(request,'index.html')
 
-def about(request):
-    result = f"""first_name: <b>{author["first_name"]}</b></br>,
-                nickname :<b>{author["nickname"]}</b></br>,
-                last_name: <b>{author["last_name"]}</b></br>,
-                phone: <b>{author["phone"]}</b></br>,
-                email: <b>{author["email"]}</b></br>
-    """
-    return HttpResponse(result)
+
 
 def item(request, item_id: int):
-    for item in items:
-        if item["id"] == item_id:
-            context = {
-                "item":item
-            }
-            return render(request,'item.html', context)
-    # return HttpResponseNotFound(f"Item with id={item_id} not found")
-    raise Http404(f"Item with id={item_id} not found")
+    try:
+        item = Item.objects.get(pk=item_id)
+    except ObjectDoesNotExist:
+        raise Http404(f"Item with id={item_id} not found")
+    context = {
+        "item":item
+    }
+    return render(request,'item.html', context)
+
 
 def items_list(request):
     items = Item.objects.all()
