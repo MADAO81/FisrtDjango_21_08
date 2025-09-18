@@ -8,13 +8,13 @@
 <h1>Item: {{item.name}}</h1>
 <div>
 <!--    Quantity: {{item.count |default:"Out of stock"}}-->
-    Quantity:<span style="color:green">
+    Quantity:
     {% if item.count %}
-        {{item.count}}
+        <span style="color:green">{{item.count}}</span>
     {%else%}
-        "Out of stock"
+        <span style="color:red">"Out of stock"</span>
     {% endif %}
-    </span>
+
 </div>
 <a href="/items">Back</a>
 </body>

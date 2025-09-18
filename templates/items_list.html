@@ -3,12 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Items list</title>
+    <style>
+        .item-card {
+            display: inline-block;
+            border: 2px solid black;
+            padding: 10px
+            }
+    </style>
 </head>
 <body>
 <a href="/">Home</a>
     <ol>
         {% for item in items %}
-            <li><a href="item/{{item.id}}">{{item.name}}</a></li>
+        <a href="item/{{item.id}}">
+            <li class="item-card">
+                {{item.name}}
+                <div>Product description</div>
+            </li>
+        </a>
         {% endfor %}
     </ol>>
 </body>
