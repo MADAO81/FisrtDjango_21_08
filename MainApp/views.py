@@ -4,8 +4,6 @@ from MainApp.models import Item
 from django.core.exceptions import ObjectDoesNotExist
 
 
-
-
 def main_page(request):
     return render(request,'index.html')
 

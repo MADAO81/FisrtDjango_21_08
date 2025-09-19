@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Main page</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 <h1>Greetings, Boss!</h1>>
-<a href="/items">List of goods </a>>
-</body>
-</html>
+<!--<a href="/items">List of goods </a>>-->
+<a href="{% url 'items-list' %}">List of goods </a>>
+{% endblock %}
